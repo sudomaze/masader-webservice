@@ -10,7 +10,7 @@ def load_masader_dataset_as_dict():
     return list(
         load_dataset(
             'arbml/masader',
-            download_mode=DownloadMode.FORCE_REDOWNLOAD,
+            download_mode=DownloadMode.REUSE_CACHE_IF_EXISTS,
         )['train']
     )
 
