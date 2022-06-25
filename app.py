@@ -51,3 +51,6 @@ def datasets(index: str):
             return jsonify(f'Dataset index is out of range, the index should be between 1 and {len(masader)}.'), 404
     else:
         return jsonify(masader)
+
+
+#app.run(host="127.0.0.1", port=5000)
