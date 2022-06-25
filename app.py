@@ -23,10 +23,8 @@ masader = load_masader_dataset_as_dict()
 @app.route('/datasets/<index>')
 def datasets(index: str):
     global masader
-
-    if random.random() <= 0.1:
-        print('Re-downloading the dataset...')
-        masader = load_masader_dataset_as_dict()
+    
+    masader = load_masader_dataset_as_dict()
 
     if index:
         index = int(index)
