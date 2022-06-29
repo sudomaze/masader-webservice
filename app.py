@@ -22,9 +22,9 @@ def get_datasets():
     masader_page = masader[(page - 1) * size : page * size]
 
     if not masader_page:
-        response = jsonify('Page not found.'), 404
+        response = jsonify('Page not found.')
         response.headers.add('Access-Control-Allow-Origin', '*')
-        return response
+        return response, 404
     response = jsonify(list(map(lambda element: dict_filter(element, features), masader_page)))
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
