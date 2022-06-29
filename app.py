@@ -37,9 +37,12 @@ def get_dataset(index: int):
     features = request.args.get('features', default='all', type=str).split(',')
 
     if not (1 <= index <= len(masader)):
-        return jsonify(f'Dataset index is out of range, the index should be between 1 and {len(masader)}.'), 404
-
-    return jsonify(dict_filter(masader[index - 1], features))
+        response = jsonify(f'Dataset index is out of range, the index should be between 1 and {len(masader)}.')
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response, 404
+    response = jsonify(dict_filter(masader[index - 1], features))
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 
 @app.route('/datasets/tags')
@@ -48,7 +51,9 @@ def get_tags():
 
     features = request.args.get('features', default='all', type=str).split(',')
 
-    return jsonify(dict_filter(tags, features))
+    response = jsonify(dict_filter(tags, features))
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 
 @app.route('/refresh')
@@ -58,4 +63,6 @@ def refresh():
     print('Refreshing globals...')
     masader, tags = load_masader_dataset()
 
-    return jsonify(f'The datasets updated successfully! The current number of available datasets is {len(masader)}.')
+    response = jsonify(f'The datasets updated successfully! The current number of available datasets is {len(masader)}.')
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
